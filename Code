@@ -1,0 +1,23 @@
+int photoresistor = A5;
+int photoresistorpower = A0;
+
+
+void setup() {
+    pinMode(photoresistor, INPUT);
+    pinMode(photoresistorpower, OUTPUT);
+    
+    digitalWrite(photoresistorpower, HIGH);
+
+}
+
+void loop() {
+
+int lightlevel = analogRead(photoresistor);
+//int i = 0;
+
+//classify whether the sun hits the terrarium
+if (lightlevel > 2) Particle.publish("sunlight", "up", PRIVATE);
+if (lightlevel < 2) Particle.publish("sunlight","down", PRIVATE);
+
+delay(3000);
+}
